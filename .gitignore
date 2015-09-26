@@ -1,0 +1,6 @@
+#Ignore files with .aux, .bbl, .blg, .log, .syntex.gx file types
+*.aux
+*.bbl
+*.blg
+*.log
+*.syntex.gz
