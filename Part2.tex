@@ -1,0 +1,31 @@
+\documentclass[]{article}
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+
+%opening
+\title{Project Part 2}
+\author{Janette Rounds, David Rice, Mitch Vander Linden}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\section{Bayesian Classifier Learning Algorithm}
+In the field of Machine Learning, there are many models based off of Bayes Theorem: 
+$$P(x|y) = \frac{P(y|x)P(x)}{P(y)}$$ where $x$ and $y$ are events, and $P(x)$ is the probability of $x$ \cite{koller2009probabilistic}.  In short, Bayes Theorem states that the probability of an event $x$, given that we know event $y$ happened, is proportional to the probability of event $y$ given event $x$ times the probability of $x$. Bayes Theorem allows us to use prior information about a domain or a model in order to assess what can be thought of as a "degree of belief". 
+
+There are two Bayesian methods that we are concerned with in \cite[Liu 2013]{liu2013bayesian}, Bayesian Optimization and Naive Bayes Classification (NB).  NB is a powerful Machine Learning method that allows us to assign a category (or a label) to an observation based on a training data set \cite{koller2009probabilistic}. NB is a powerful model, but it also has some very strong assumptions, primarily that all attributes (variables that help us figure out which label to assign) are independent of one another. There are countless domains and problems where this assumption does not hold. 
+
+Our other Bayesian method of interest is Bayesian Optimization (BO). BO involves approximating functions, especially functions that are computationally expensive, where derivatives do not exist or are unknown, or where there are only a few observations available \cite{brochu2010tutorial}. In \cite[Liu 2013]{liu2013bayesian}, the authors show that, through an algorithm that converts the BO model into a classifier, we can create a Bayesian Classifier without the strong independence assumption of Naive Bayes Classifiers. 
+
+\section{Tree Counting Algorithm}
+\cite[Santoro 2013]{santoro2013tree}
+\section{Algorithm for Automated Scheduling}
+\cite[Casadesus 2012]{casadesus2012drip}
+\bibliographystyle{ieeetr}
+\bibliography{bib1}
+
+\end{document}
