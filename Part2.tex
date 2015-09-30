@@ -23,7 +23,27 @@ There are two Bayesian methods that we are concerned with in Liu et al.\cite[Liu
 Our other Bayesian method of interest is Bayesian Optimization (BO). BO involves approximating functions, especially functions that are computationally expensive, where derivatives do not exist or are unknown, or where there are only a few observations available \cite{brochu2010tutorial}. In \cite[Liu 2013]{liu2013bayesian}, the authors show that, through an algorithm that converts the BO model into a classifier, we can create a Bayesian Classifier without the strong independence assumption of Naive Bayes Classifiers. 
 
 \section{Tree Counting Algorithm}
-\cite[Santoro 2013]{santoro2013tree}
+Much academic insight and effort has been put in to the challenge of image processing, geospatial data integration, and handling optical sensor input.  Specifically, there is currently ongoing investigation into optimizing agricultural study by eliminating the need to manually create maps of tree-types in sectors of forest and using advanced algorithms to collect tree data from GeoEye-1 scans to produce beneficial agricultural analysis \cite[Santoro 2013]{santoro2013tree}.
+
+Although much work has been done to analyze data from forest scans, a unique challenge has presented itself when it comes to man made nurseries consisting of fruit trees due to the spread of the trees and the abundance of man-made objects. In order to tackle this task and attempt to reduce noise from scans of a typical orchard, a four-step algorithm has been devised with the following steps
+\begin{enumerate}
+	\item Asymmetrical smoothing filter
+	\item Local minimum filter
+	\item Mask layer
+	\item Spatial aggregation
+\end{enumerate}
+The asymmetrical smoothing filter intends to eliminate the error of locating of the center of each tree entity due to dark tones of tree crown shadows being shifted depending on the shadow of the tree.  This is circumvented by using an asymmetric weighted kernel that uses a function that considers the short shadows of trees and a variable representing the sun's azimuth angle.
+
+The local minimum filter step takes a very small window of the image (e.g. often close to a 7 x 7 pixel square which covers 1.5 meters of the surveyed area) and applies a local minima kernel in order to find individual tree entities by having a targetable local minima.
+
+The mark layer step intends to eliminate false positive values.  This is accomplished by using two mask layers based on local standard deviation and normalized difference vegetation index.  The two mask layers allow one to compare the target object with its expected pixel resolution and determine if the entity is or is not a tree.
+
+The spatial aggregation operator calculates a proper centroid in the situation that identical pixel values in a single entity were found.  This is accomplished through small spatial aggregation using Euclidean distance.
+
+The results of the paper show that the project had a correct detection percentage in the range of 93.7\% to 98.3\% for citrus tree subsections; however, the detection percentage had a minimum of 78.0\% correct for sections with both citrus and olive species.  Improvements to the method do need to be made for mixed species. 
+
+
+
 \section{Automated Scheduling Algorithm}
 The question of efficient crop irrigation is one of great importance in agricultural pursuits of all kinds. On the one hand, the results of under-watering are quite apparent. In contrast, over-watering can also have detrimental effects, and in many climates water is a limited resource that cannot be wasted.
 
