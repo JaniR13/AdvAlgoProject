@@ -8,7 +8,7 @@
 %opening
 \title{Part 3: Bayesian Optimization of the flexible Job Shop Scheduling Problem}
 \author{Group 06}
-%\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}
+\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}
 
 \begin{document}
 
@@ -22,9 +22,8 @@ TODO: brief introduction.
 \section{Motivation}
 The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
 
+\newpage
 \section{Algorithm}
-Provide pseudocode for the algorithm that your team is investigating.  Provide 
-pseudocode for the algorithm, and be sure to 
 
 \begin{algorithm}\caption{\textsc{Hybrid Evloution Algorithm}}
  \begin{algorithmic}[1]
@@ -46,9 +45,27 @@ pseudocode for the algorithm, and be sure to
  	\State g($t) \gets 0$
  	\EndIf
         \EndWhile\\
-~~~~~~\Return best solution of S-fJSP \textit{gbest(t)}
+~~~~~\Return best solution of S-fJSP \textit{gbest(t)}
  \end{algorithmic}
 \end{algorithm}
+
+The Hybrid Evolution Algorithm displayed above takes as input the Job-Shop problem data and constraints, and returns an approximation of the best solution to the Flexible Job-Shop Problem.\\
+
+The variable $t$ represents the $t^{th}$ generation of the solution set - it is initialized to 0 on line 3.\\
+
+Next, the population p($t$) is initialized to include a random set of candidate solutions to the problem. p($t$) is further divided into subgroups in a random fashion.\\
+
+After the population has been initialized, the main \textbf{while} loop is entered, which will iterate until the the termination condition has been satisfied based on the problem constraints.\\
+
+At the start of each loop iteration, the population is evaluated using particle swarm optimization (PSO). Compared to a genetic algorithm, a PSO is more likely to include the optimal solution in the problem space, so the result has a higher probability to be accurate\cite{sun2015bayesian}.\\
+
+The best solution for the population is kept, and if it is a valid solution, the population grouping is adjust according to the Bayesian Network for each subgroup. The loop then repeats, evaluating the data based on the new subgrouping of the population.\\
+
+When the loop termination condition is met, the best solution is returned.
+
+
+
+
 
 \section{Analysis}
 Optional: you are welcome to provide a brief proof of correctness or a 
