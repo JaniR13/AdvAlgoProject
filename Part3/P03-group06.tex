@@ -20,17 +20,7 @@ format).
 \section{Introduction}
 The following algorithm attempts to find an optimized way to schedule the Job-shop Scheduling Problem (JSP) in a more flexible manner called the flexible Job-shop Scheduling Problem (fJSP). Due to the problem being an NP-Hard solution, the algorithm takes advantage of hybrid evolutionary algorithms that use particle swarm optimization and basian network structuring to learn the optimal relationships between machine, task, and objective function. 
 
-The metrics of the algorithm's success in \cite{sun2015bayesian} compare the algorithm run on the following seven environments:
-\begin{enumerate}
-	\item Genetic Algorithm (GA)
-	\item Binary Genetic Algorithm (Binary GA)
-	\item Differential Evolutionary Algorithm (DE)
-	\item Particle Swarm Optimization (PSO)
-	\item Particle Swarm Optimization with Adaptive Grouping Differential Evolution Algorithm (SaNSDE)
-	\item Cooperative Coevolution Group (CCPSO)
-	\item Bayesian Grouping (CCBhEA) 
-\end{enumerate}
-where CCBhEA had the most optimal max, mix, and mean time to compute for all scalings of the problem.
+The metrics of the algorithm's success in \cite{sun2015bayesian} compare the algorithm run on the following seven environments: Genetic Algorithm (GA), Binary Genetic Algorithm (Binary GA), Differential Evolutionary Algorithm (DE), Particle Swarm Optimization (PSO), Particle Swarm Optimization with Adaptive Grouping Differential Evolution Algorithm (SaNSDE), Cooperative Coevolution Group (CCPSO), and Bayesian Grouping (CCBhEA). CCBhEA had the most optimal max, mix, and mean time to compute for all scalings of the problem.
 
 \section{Motivation}
 The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
@@ -62,11 +52,6 @@ running time analysis of the algorithm.  The difficulty of doing this will, of
 ocurse, depend on your algorithm.
 
 \section{Discussion}
-Conclude with a discussion.  Things that you might want to consider to put in 
-the discussion (or maybe in their own sections) include: what are some variants 
-of this algorithm? Where can this algorithm be applied?  What improvements can 
-be made to this algorithm (perhaps commenting on experimental results of the 
-original paper)?  Has there been follow-up work (trace the paper's citations in 
-google schoolar!)
+For the scope of this project, it will be most beneficial to only look at the Bayesian Grouping variant of the algorithm given the CCBhEA implimentation brought the most optimal results for all scalings of the problem size. It will also be helpful to keep the context of the project generalized to any grouping of machines that share a multitude of functions rather than applying the algorithm to one specific scenario. A task of primary interest will be to see if there are any ways to improve the current CCBhEA algorithm. There may be an time improvement optimization ready to be found within the structure of the update functions found in the while loop of the pseudocode.
 
 \end{document}
