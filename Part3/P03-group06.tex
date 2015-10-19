@@ -7,8 +7,8 @@
 
 %opening
 \title{Part 3: Bayesian Optimization of the flexible Job Shop Scheduling Problem}
-\author{Group 06} \\ 
-\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}}
+\author{Group 06}
+%\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}
 
 \begin{document}
 
@@ -26,20 +26,27 @@ The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\
 Provide pseudocode for the algorithm that your team is investigating.  Provide 
 pseudocode for the algorithm, and be sure to 
 
-\begin{algorithm}\caption{\textsc{AwesomeAlgorithm}}
+\begin{algorithm}\caption{\textsc{Hybrid Evloution Algorithm}}
  \begin{algorithmic}[1]
-   \State {\bf Input:} TODO:list input
-   \State {\bf Output:} TODO:list output\\
+   \State {\bf Input:} Problem Data, Parameters
+   \State {\bf Output:} Best Solution of S-fJSP
    
-   \State $k \gets \textsc{Random}(0,10)$
-   \If{$n=0$}
-	\While{$i < k$}
-	\State $a[i] \gets b[i]$
+   \State $t \gets 0$
+   \State initialize population p($t$) by random solution candidates satisfying the constraints;
+ get sub-p($t$) by randomly grouping
+ 	\State g($t) \gets 0$
+	\While{not meeting termination condition}
+	\State evaluate p($t$) by PSO with grouping mechanism and parameters adaptive
+ 	\State get the training data set Data from each sub-p($t$)
+ 	\State g($t) \gets $g($t + 1$)
+ 	\State keep best solution of population $gbest(t)$ and personal best $pbest(t)$
+ 	\If {g($t$) meets condition}
+ 	\State select the best BN structure by \textit{Data}
+ 	\State readjust the grouping by BN structure for each sub-p($t$)
+ 	\State g($t) \gets 0$
+ 	\EndIf
         \EndWhile\\
-~~~~~~\Return $a$
-   \Else\\
-   ~~~~~~\Return $b$
-   \EndIf
+~~~~~~\Return best solution of S-fJSP \textit{gbest(t)}
  \end{algorithmic}
 \end{algorithm}
 
