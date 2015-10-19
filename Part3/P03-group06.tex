@@ -7,8 +7,8 @@
 
 %opening
 \title{Part 3: Bayesian Optimization of the flexible Job Shop Scheduling Problem}
-\author{Group 06} \\ 
-\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}}
+\author{Group 06 \\ 
+\small Janette Rounds \\ \small David Rice \\ \small Mitch Vander Linden}
 
 \begin{document}
 
@@ -17,7 +17,20 @@
 (NOTE: this is just a sample outline, and you are free to deviate from this 
 format).
 
-TODO: brief introduction.
+\section{Introduction}
+The following algorithm attempts to find an optimized way to schedule the Job-shop Scheduling Problem (JSP) in a more flexible manner called the flexible Job-shop Scheduling Problem (fJSP). Due to the problem being an NP-Hard solution, the algorithm takes advantage of hybrid evolutionary algorithms that use particle swarm optimization and basian network structuring to learn the optimal relationships between machine, task, and objective function. 
+
+The metrics of the algorithm's success in \cite{sun2015bayesian} compare the algorithm run on the following seven environments:
+\begin{enumerate}
+	\item Genetic Algorithm (GA)
+	\item Binary Genetic Algorithm (Binary GA)
+	\item Differential Evolutionary Algorithm (DE)
+	\item Particle Swarm Optimization (PSO)
+	\item Particle Swarm Optimization with Adaptive Grouping Differential Evolution Algorithm (SaNSDE)
+	\item Cooperative Coevolution Group (CCPSO)
+	\item Bayesian Grouping (CCBhEA) 
+\end{enumerate}
+where CCBhEA had the most optimal max, mix, and mean time to compute for all scalings of the problem.
 
 \section{Motivation}
 The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
