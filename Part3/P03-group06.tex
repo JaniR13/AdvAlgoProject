@@ -7,8 +7,13 @@
 
 %opening
 \title{Part 3: Bayesian Optimization of the flexible Job Shop Scheduling Problem}
+<<<<<<< HEAD
 \author{Group 06 \\ 
 \small Janette Rounds \\ \small David Rice \\ \small Mitch Vander Linden}
+=======
+\author{Group 06}
+\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}
+>>>>>>> c748bdeebcfd7fe74616a05e1306108aa1f32f26
 
 \begin{document}
 
@@ -25,26 +30,50 @@ The metrics of the algorithm's success in \cite{sun2015bayesian} compare the alg
 \section{Motivation}
 The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
 
+\newpage
 \section{Algorithm}
-Provide pseudocode for the algorithm that your team is investigating.  Provide 
-pseudocode for the algorithm, and be sure to 
 
-\begin{algorithm}\caption{\textsc{AwesomeAlgorithm}}
+\begin{algorithm}\caption{\textsc{Hybrid Evloution Algorithm}}
  \begin{algorithmic}[1]
-   \State {\bf Input:} TODO:list input
-   \State {\bf Output:} TODO:list output\\
+   \State {\bf Input:} Problem Data, Parameters
+   \State {\bf Output:} Best Solution of S-fJSP
    
-   \State $k \gets \textsc{Random}(0,10)$
-   \If{$n=0$}
-	\While{$i < k$}
-	\State $a[i] \gets b[i]$
+   \State $t \gets 0$
+   \State initialize population p($t$) by random solution candidates satisfying the constraints;
+ get sub-p($t$) by randomly grouping
+ 	\State g($t) \gets 0$
+	\While{not meeting termination condition}
+	\State evaluate p($t$) by PSO with grouping mechanism and parameters adaptive
+ 	\State get the training data set Data from each sub-p($t$)
+ 	\State g($t) \gets $g($t + 1$)
+ 	\State keep best solution of population $gbest(t)$ and personal best $pbest(t)$
+ 	\If {g($t$) meets condition}
+ 	\State select the best BN structure by \textit{Data}
+ 	\State readjust the grouping by BN structure for each sub-p($t$)
+ 	\State g($t) \gets 0$
+ 	\EndIf
         \EndWhile\\
-~~~~~~\Return $a$
-   \Else\\
-   ~~~~~~\Return $b$
-   \EndIf
+~~~~~\Return best solution of S-fJSP \textit{gbest(t)}
  \end{algorithmic}
 \end{algorithm}
+
+The Hybrid Evolution Algorithm displayed above takes as input the Job-Shop problem data and constraints, and returns an approximation of the best solution to the Flexible Job-Shop Problem.\\
+
+The variable $t$ represents the $t^{th}$ generation of the solution set - it is initialized to 0 on line 3.\\
+
+Next, the population p($t$) is initialized to include a random set of candidate solutions to the problem. p($t$) is further divided into subgroups in a random fashion.\\
+
+After the population has been initialized, the main \textbf{while} loop is entered, which will iterate until the the termination condition has been satisfied based on the problem constraints.\\
+
+At the start of each loop iteration, the population is evaluated using particle swarm optimization (PSO). Compared to a genetic algorithm, a PSO is more likely to include the optimal solution in the problem space, so the result has a higher probability to be accurate\cite{sun2015bayesian}.\\
+
+The best solution for the population is kept, and if it is a valid solution, the population grouping is adjust according to the Bayesian Network for each subgroup. The loop then repeats, evaluating the data based on the new subgrouping of the population.\\
+
+When the loop termination condition is met, the best solution is returned.
+
+
+
+
 
 \section{Analysis}
 Optional: you are welcome to provide a brief proof of correctness or a 
