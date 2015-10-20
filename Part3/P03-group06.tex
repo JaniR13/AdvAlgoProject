@@ -7,31 +7,27 @@
 
 %opening
 \title{Part 3: Bayesian Optimization of the flexible Job Shop Scheduling Problem}
-<<<<<<< HEAD
 \author{Group 06 \\ 
-\small Janette Rounds \\ \small David Rice \\ \small Mitch Vander Linden}
-=======
-\author{Group 06}
-\small{Janette Rounds \\ David Rice \\ Mitch Vander Linden}
->>>>>>> c748bdeebcfd7fe74616a05e1306108aa1f32f26
+\small Janette Rounds, \small David Rice, \small Mitch Vander Linden}
+
 
 \begin{document}
 
 \maketitle
 
-(NOTE: this is just a sample outline, and you are free to deviate from this 
-format).
-
 \section{Introduction}
-The following algorithm attempts to find an optimized way to schedule the Job-shop Scheduling Problem (JSP) in a more flexible manner called the flexible Job-shop Scheduling Problem (fJSP). Due to the problem being an NP-Hard solution, the algorithm takes advantage of hybrid evolutionary algorithms that use particle swarm optimization and basian network structuring to learn the optimal relationships between machine, task, and objective function. 
-
-The metrics of the algorithm's success in \cite{sun2015bayesian} compare the algorithm run on the following seven environments: Genetic Algorithm (GA), Binary Genetic Algorithm (Binary GA), Differential Evolutionary Algorithm (DE), Particle Swarm Optimization (PSO), Particle Swarm Optimization with Adaptive Grouping Differential Evolution Algorithm (SaNSDE), Cooperative Coevolution Group (CCPSO), and Bayesian Grouping (CCBhEA). CCBhEA had the most optimal max, mix, and mean time to compute for all scalings of the problem.
+The following algorithm attempts to find an optimized way to schedule the Job-shop Scheduling Problem (JSP) in a more flexible manner called the flexible Job-shop Scheduling Problem (fJSP). The algorithm takes advantage of hybrid evolutionary algorithms that use particle swarm optimization and bayesian network structuring to learn the optimal relationships between machine, task, and objective function. 
 
 \section{Motivation}
-The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
+The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. 
 
-\newpage
+Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
+
 \section{Algorithm}
+
+The Hybrid Evolution Algorithm displayed above takes as input the Job-Shop problem data and constraints, and returns an approximation of the best solution to the Flexible Job-Shop Problem. The variable $t$ represents the $t^{th}$ generation of the solution set - it is initialized to 0 on line 3. Next, the population p($t$) is initialized to include a random set of candidate solutions to the problem. p($t$) is further divided into subgroups in a random fashion. After the population has been initialized, the main \textbf{while} loop is entered, which will iterate until the the termination condition has been satisfied based on the problem constraints.
+
+At the start of each loop iteration, the population is evaluated using particle swarm optimization (PSO). Compared to a genetic algorithm, a PSO is more likely to include the optimal solution in the problem space, so the result has a higher probability to be accurate\cite{sun2015bayesian}. The best solution for the population is kept, and if it is a valid solution, the population grouping is adjust according to the Bayesian Network for each subgroup. The loop then repeats, evaluating the data based on the new subgrouping of the population. When the loop termination condition is met, the best solution is returned.
 
 \begin{algorithm}\caption{\textsc{Hybrid Evloution Algorithm}}
  \begin{algorithmic}[1]
@@ -57,30 +53,13 @@ The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\
  \end{algorithmic}
 \end{algorithm}
 
-The Hybrid Evolution Algorithm displayed above takes as input the Job-Shop problem data and constraints, and returns an approximation of the best solution to the Flexible Job-Shop Problem.\\
-
-The variable $t$ represents the $t^{th}$ generation of the solution set - it is initialized to 0 on line 3.\\
-
-Next, the population p($t$) is initialized to include a random set of candidate solutions to the problem. p($t$) is further divided into subgroups in a random fashion.\\
-
-After the population has been initialized, the main \textbf{while} loop is entered, which will iterate until the the termination condition has been satisfied based on the problem constraints.\\
-
-At the start of each loop iteration, the population is evaluated using particle swarm optimization (PSO). Compared to a genetic algorithm, a PSO is more likely to include the optimal solution in the problem space, so the result has a higher probability to be accurate\cite{sun2015bayesian}.\\
-
-The best solution for the population is kept, and if it is a valid solution, the population grouping is adjust according to the Bayesian Network for each subgroup. The loop then repeats, evaluating the data based on the new subgrouping of the population.\\
-
-When the loop termination condition is met, the best solution is returned.
 
 
-
-
-
-\section{Analysis}
-Optional: you are welcome to provide a brief proof of correctness or a 
-running time analysis of the algorithm.  The difficulty of doing this will, of 
-ocurse, depend on your algorithm.
 
 \section{Discussion}
 For the scope of this project, it will be most beneficial to only look at the Bayesian Grouping variant of the algorithm given the CCBhEA implimentation brought the most optimal results for all scalings of the problem size. It will also be helpful to keep the context of the project generalized to any grouping of machines that share a multitude of functions rather than applying the algorithm to one specific scenario. A task of primary interest will be to see if there are any ways to improve the current CCBhEA algorithm. There may be an time improvement optimization ready to be found within the structure of the update functions found in the while loop of the pseudocode.
+
+\bibliographystyle{ieeetr}
+\bibliography{bib}
 
 \end{document}
