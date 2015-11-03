@@ -1,0 +1,78 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+%opening
+\title{Part 4: Bayesian Optimization of the flexible Job Shop Scheduling Problem}
+\author{Group 06 \\ 
+\small Janette Rounds, \small David Rice, \small Mitch Vander Linden}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction}
+The following algorithm attempts to find an optimized way to schedule the Job-shop Scheduling Problem (JSP) in a more flexible manner called the flexible Job-shop Scheduling Problem (fJSP). The algorithm takes advantage of hybrid evolutionary algorithms that use particle swarm optimization and bayesian network structuring to learn the optimal relationships between machine, task, and objective function. 
+
+\section{Motivation}
+The Job-Shop Scheduling Problem (JSP) is an NP-Hard problem in computer science\cite{cheng1996tutorial}. Let us imagine we have a set of machines and a set of jobs to be completed. Each job is a set of operations and the operation order is fixed. In the classical formulation of JSP, each operation has a fixed processing time, and a required machine. However, these authors used the flexible job-shop scheduling problem (fJSP) that assumes that one machine can perform multiple kinds of operation, and as such, there is no fixed processing time \cite{sun2015bayesian}. There are several potential constraints we could use including: a job does not visit the same machines twice; there are no precedence constraints among operations of different jobs; operations can not be interrupted; etc. 
+
+Both JSP and fJSP are minimization problems, that is, we generally want to minimize the overall time to completion of all the jobs. As we stated before, there is no way to solve this problem in less than exponential time. Therefore, there are several algorithms we can use to approximate the solution. The authors combined Bayesian Optimization and Evolutionary Algorithms approaches to approximate a solution for the fJSP. 
+\section{Algorithm}
+The Hybrid Evolution Algorithm displayed above takes as input the Job-Shop problem data and constraints, and returns an approximation of the best solution to the Flexible Job-Shop Problem. The variable $t$ represents the $t^{th}$ generation of the solution set - it is initialized to 0 on line 3. Next, the population p($t$) is initialized to include a random set of candidate solutions to the problem. p($t$) is further divided into subgroups in a random fashion. After the population has been initialized, the main \textbf{while} loop is entered, which will iterate until the the termination condition has been satisfied based on the problem constraints.
+
+At the start of each loop iteration, the population is evaluated using particle swarm optimization (PSO). Compared to a genetic algorithm, a PSO is more likely to include the optimal solution in the problem space, so the result has a higher probability to be accurate\cite{sun2015bayesian}. The best solution for the population is kept, and if it is a valid solution, the population grouping is adjust according to the Bayesian Network for each subgroup. The loop then repeats, evaluating the data based on the new subgrouping of the population. When the loop termination condition is met, the best solution is returned.
+
+\section{+1 Options}
+We have selected a complex algorithm that solves a complex set of problems. If we were to simply explain all of the equations in PSO and Bayesian Network Learning (parts of our algorithm), we would have a video much longer than 4-5 minutes. However, we can run through a simple example. This would give people a high-level understanding of our algorithm without having to delve into the theory of Particle Swarm Optimization for example. 
+
+\section{Discussion}
+Conclude with a discussion.  Things that you might want to consider to put in 
+the discussion (or maybe in their own sections) include: What are the biggest 
+challenges that you will face for the remainder of this project?  
+
+\bibliographystyle{plain}
+\bibliography{bibfilename} 
+
+\newpage
+\appendix
+\section{Timeline}
+(NOTE: it is good form to have a reference to this bibliography somewhere in 
+the main body of your paper).
+
+The following are a list of tasks that we need to accomplish in order to 
+complete our project:
+
+\paragraph{Structure the video.} We need to plan a detailed outline of our 
+video.  We will meet together to do this.
+
+\paragraph{Decide materials needed.}  Make sure you have everything you need in 
+order to make this 4-5 minute video!
+
+... and so forth.
+
+The following table gives the timeline of how we plan to accomplish these tasks:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |l | c | r|}
+  \hline
+  Date & Who? & Short Description \\
+  \hline
+  \hline
+  10/30 & All & Structure the video. \\
+  \hline
+  10/31 & Joe S. & Decide materials needed. \\
+  \hline
+  \ldots & \ldots & \ldots \\
+  \hline
+  11/29 & All & Final review of video. \\
+  \hline
+\end{tabular}
+\end{table}
+
+\end{document}
