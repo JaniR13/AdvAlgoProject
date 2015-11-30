@@ -6,3 +6,6 @@
 *.syntex.gz
 *.synctex.gz
 *.pdf
+
+#Powerpoint temp files
+~$*
